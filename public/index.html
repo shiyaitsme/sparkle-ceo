@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SPARK!E · 董事长模拟(原型)</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="stage">
+  <div id="scene" class="frame">
+    <canvas id="sceneCv" width="130" height="62"></canvas>
+    <div class="scan"></div>
+  </div>
+
+  <div id="side" class="frame">
+    <div id="portraitWrap"><canvas id="portrait" width="24" height="24"></canvas></div>
+    <div id="nameBar">旁白</div>
+    <div id="stats"></div>
+  </div>
+
+  <div id="dialog" class="frame">
+    <div id="speaker"></div>
+    <div id="text"></div>
+    <div id="choices"></div>
+    <div id="next"></div>
+  </div>
+
+  <div id="cmds" class="frame">
+    <div id="cmdGrid">
+      <button class="cmd" data-cmd="gig"><span class="ico">✉</span><span class="lb">接商单</span><span class="sub">3 时间</span></button>
+      <button class="cmd" data-cmd="work"><span class="ico">✦</span><span class="lb">做自己的作品</span><span class="sub">3 时间</span></button>
+      <button class="cmd" data-cmd="apply"><span class="ico">★</span><span class="lb">投展览/基金</span><span class="sub">2 时间</span></button>
+      <button class="cmd" data-cmd="ledger"><span class="ico">▤</span><span class="lb">账本</span><span class="sub">不花时间</span></button>
+      <button class="cmd" data-cmd="end"><span class="ico">▶</span><span class="lb">结束本季度</span><span class="sub">进入结算</span></button>
+      <button class="cmd" data-cmd="restart"><span class="ico">↺</span><span class="lb">重新开始</span><span class="sub">清除存档</span></button>
+    </div>
+    <div id="hint"></div>
+  </div>
+
+  <div id="overlay" hidden></div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>

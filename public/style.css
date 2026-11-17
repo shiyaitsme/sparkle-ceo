@@ -1,0 +1,133 @@
+:root {
+  --bg: #1a0f2e;
+  --lav: #cdbbe0;
+  --lav-hi: #f3e6ff;
+  --lav-lo: #5a4278;
+  --ink: #2a1840;
+  --pink: #e86aa0;
+  --pink-lt: #f6b8d4;
+  --cyan: #58c8e8;
+  --gold: #f8d860;
+  --red: #c8284a;
+  --green: #2a8a5a;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  overflow: hidden;
+  font-family: "Zpix", "DotGothic16", "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", "WenQuanYi Micro Hei", monospace;
+  color: var(--ink);
+}
+
+#stage {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 800px;
+  height: 560px;
+  transform-origin: 0 0;
+  background: #7e5a9c;
+  background-image:
+    linear-gradient(45deg, #86629f 25%, transparent 25%, transparent 75%, #86629f 75%),
+    linear-gradient(45deg, #86629f 25%, transparent 25%, transparent 75%, #86629f 75%);
+  background-size: 4px 4px;
+  background-position: 0 0, 2px 2px;
+  border: 4px solid #3a2556;
+}
+
+.frame {
+  position: absolute;
+  background: var(--lav);
+  border: 3px solid;
+  border-color: var(--lav-hi) var(--lav-lo) var(--lav-lo) var(--lav-hi);
+  outline: 2px solid #2a1840;
+}
+
+/* ---------- scene ---------- */
+#scene { left: 12px; top: 12px; width: 520px; height: 250px; padding: 0; overflow: hidden; background: #000; }
+#scene canvas { display: block; width: 100%; height: 100%; image-rendering: pixelated; image-rendering: crisp-edges; }
+.scan {
+  position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(to bottom, rgba(0,0,0,0.10) 0 1px, transparent 1px 3px);
+}
+
+/* ---------- side panel ---------- */
+#side { left: 544px; top: 12px; width: 244px; height: 250px; padding: 6px; display: flex; flex-direction: column; align-items: center; }
+#portraitWrap {
+  width: 84px; height: 84px; border: 2px solid #2a1840; background: #000; flex: none;
+}
+#portrait { width: 100%; height: 100%; display: block; image-rendering: pixelated; image-rendering: crisp-edges; }
+#nameBar {
+  width: 100%; margin-top: 4px; text-align: center; font-size: 14px; line-height: 20px; height: 22px;
+  background: var(--lav-lo); color: #fff; border: 2px solid #2a1840; flex: none;
+}
+#stats { width: 100%; margin-top: 4px; font-size: 13px; line-height: 16px; }
+#stats .row { display: flex; justify-content: space-between; padding: 0 2px; border-bottom: 1px dotted rgba(42,24,64,0.35); }
+#stats .row b { font-weight: normal; }
+#stats .row.warn b { color: var(--red); }
+#stats .row.good b { color: var(--green); }
+
+/* ---------- dialog ---------- */
+#dialog { left: 12px; top: 274px; width: 520px; height: 274px; padding: 8px 14px; display: flex; flex-direction: column; cursor: pointer; }
+#speaker { font-size: 14px; color: var(--lav-lo); height: 20px; flex: none; letter-spacing: 1px; }
+#text { font-size: 16px; line-height: 24px; flex: none; min-height: 72px; max-height: 120px; overflow: hidden; white-space: pre-wrap; }
+#text.compact { min-height: 0; font-size: 15px; line-height: 22px; }
+#choices { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; overflow-y: auto; flex: 1 1 auto; min-height: 0; }
+.choice {
+  text-align: left; font: inherit; font-size: 14px; line-height: 18px; padding: 3px 8px;
+  background: var(--lav-hi); color: var(--ink); cursor: pointer;
+  border: 2px solid; border-color: #fff var(--lav-lo) var(--lav-lo) #fff; outline: 1px solid #2a1840;
+}
+.choice:hover:not(:disabled) { background: var(--pink-lt); }
+.choice:disabled { opacity: 0.45; cursor: not-allowed; }
+.choice .hint { display: block; font-size: 12px; line-height: 15px; color: var(--lav-lo); }
+#next {
+  position: absolute; right: 16px; bottom: 10px; width: 0; height: 0; display: none;
+  border-left: 7px solid transparent; border-right: 7px solid transparent; border-top: 9px solid var(--pink);
+  animation: blink 0.9s steps(2) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- commands ---------- */
+#cmds { left: 544px; top: 274px; width: 244px; height: 274px; padding: 8px; }
+#cmdGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+.cmd {
+  height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  font: inherit; background: var(--lav-hi); color: var(--ink); cursor: pointer; padding: 2px;
+  border: 2px solid; border-color: #fff var(--lav-lo) var(--lav-lo) #fff; outline: 1px solid #2a1840;
+}
+.cmd .ico { height: 20px; display: flex; align-items: center; }
+.cmd .ico canvas { width: 16px; height: 16px; image-rendering: pixelated; image-rendering: crisp-edges; }
+.cmd .lb { font-size: 13px; line-height: 16px; }
+.cmd .sub { font-size: 11px; line-height: 13px; color: var(--lav-lo); }
+.cmd:hover:not(:disabled) { background: var(--pink-lt); }
+.cmd:disabled { opacity: 0.4; cursor: not-allowed; }
+#hint { margin-top: 8px; font-size: 12px; line-height: 17px; color: var(--ink); }
+
+/* ---------- overlay (title / ending) ---------- */
+#overlay {
+  position: absolute; inset: 0; z-index: 10; padding: 28px 36px;
+  background: rgba(26, 15, 46, 0.94); color: #fff; overflow-y: auto;
+}
+#overlay[hidden] { display: none; }
+#overlay h1 { margin: 0 0 4px; font-size: 30px; letter-spacing: 3px; color: var(--pink-lt); text-shadow: 2px 2px 0 #5a2a78; }
+#overlay h2 { margin: 18px 0 6px; font-size: 16px; color: var(--cyan); }
+#overlay p { margin: 6px 0; font-size: 15px; line-height: 24px; }
+#overlay .sub { color: #c9b4e6; font-size: 13px; }
+#overlay .big {
+  font: inherit; font-size: 15px; padding: 8px 18px; margin: 8px 8px 0 0; cursor: pointer;
+  background: var(--lav-hi); color: var(--ink);
+  border: 2px solid; border-color: #fff var(--lav-lo) var(--lav-lo) #fff; outline: 1px solid #000;
+}
+#overlay .big:hover { background: var(--pink-lt); }
+#overlay .big.sel { background: var(--gold); }
+#overlay .log { font-size: 13px; line-height: 20px; color: #e6d8f8; }
+#overlay .bad { color: #ff8aa0; }
+#overlay .ok { color: #9af0c0; }
+#overlay table { border-collapse: collapse; font-size: 14px; margin-top: 6px; }
+#overlay td { padding: 2px 18px 2px 0; color: #e6d8f8; }
+#overlay td:last-child { color: #fff; }
