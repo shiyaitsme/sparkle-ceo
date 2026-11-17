@@ -598,7 +598,7 @@ function summaryTable() {
     ['声誉', S.rep], ['自己的作品', `${S.works} 件`], ['商单', `${S.gigs} 个`], ['买断版权', `${S.soldIP} 次`],
   ];
   return `<table>${rows.map(([a, b]) => `<tr><td>${a}</td><td>${b}</td></tr>`).join('')}</table>` +
-    (tot ? `<p class="sub">这一年你的时间:${pct}% 花在别人的订单上,${100 - pct}% 花在自己的作品上。</p>` : '');
+    (tot ? `<p class="sub">这一年你的时间:${pct}% 用在商单上,${100 - pct}% 用在自己的作品上。</p>` : '');
 }
 
 async function finish(kind) {
@@ -634,7 +634,7 @@ async function finish(kind) {
     body = '你把时间都给了自己的作品,声誉在涨,账上不宽裕。再多一两个稳定来源,就能撑得更久。';
   } else if (S.gigs >= S.works * 2) {
     title = '稳稳的接单工作室';
-    body = '你活得不错,账也好看。但这一年大部分时间都花在别人的订单上,还没有真正建立属于自己的东西。';
+    body = '你活得不错,账也好看。这一年的时间大多用在商单上,自己的作品还不多。作品和声誉再多一些,就能解锁下一条业务线。';
   } else {
     title = '活下来了';
     body = '这一年没出大事,也没有大突破。离解锁下一条业务线还差一点。';

@@ -111,7 +111,7 @@ html, body {
 /* ---------- overlay (title / ending) ---------- */
 #overlay {
   position: absolute; inset: 0; z-index: 10; padding: 28px 36px;
-  background: rgba(26, 15, 46, 0.94); color: #fff; overflow-y: auto;
+  background: #1a0f2e; color: #fff; overflow-y: auto;
 }
 #overlay[hidden] { display: none; }
 #overlay h1 { margin: 0 0 4px; font-size: 30px; letter-spacing: 3px; color: var(--pink-lt); text-shadow: 2px 2px 0 #5a2a78; }
